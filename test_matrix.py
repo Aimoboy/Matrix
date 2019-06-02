@@ -78,3 +78,14 @@ class TestMatrix(unittest.TestCase):
 			[3, 4]]
 		m2 = Matrix(values)
 		self.assertRaises(ValueError, m1.multiply_matrix_matrix, m2)
+
+	def test_mul_matrix_scalar_method(self):
+		values = [
+			[1, 1],
+			[1, 1]]
+		m1 = Matrix(values)
+		values = [
+			[5, 5],
+			[5, 5]]
+		m2 = Matrix(values)
+		self.assertEqual(m1.multiply_matrix_scalar(5), m2)

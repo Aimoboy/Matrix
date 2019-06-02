@@ -95,6 +95,26 @@ class Matrix:
 
 		return (len(self.values), line_length)
 
+	def generate_empty_values(self, rows, cols):
+		"""
+		Summary:
+		Generate empty values of the given size.
+
+		Parameters:
+		rows (int): The number of rows.
+		cols (int): The number of columns.
+
+		Returns:
+		Empty set of values.
+		"""
+
+		values = []
+
+		for x in range(rows):
+			values.append([None] * cols)
+
+		return values
+
 	def multiply_matrix_matrix(self, other):
 		"""
 		Summary:
@@ -111,15 +131,21 @@ class Matrix:
 		if self.cols != other.rows:
 			raise ValueError("Matrices not correct sizes for multiplication.")
 
-		new_values = []
-
-		for x in range(self.rows):
-			new_values.append([None] * other.cols)
+		new_values = self.generate_empty_values(self.rows, other.cols)
 
 		for x in range(len(new_values)):
 			for y in range(len(new_values[x])):
 				new_values[x][y] = self.values[x][0] * other.values[0][y]
 				for z in range(1, self.cols):
 					new_values[x][y] = new_values[x][y] + self.values[x][z] * other.values[z][y]
+
+		return Matrix(new_values)
+
+	def multiply_matrix_scalar(self, s):
+		new_values = self.generate_empty_values(self.rows, self.cols)
+
+		for x in range(self.rows):
+			for y in range(self.cols):
+				new_values[x][y] = self.values[x][y] * s
 
 		return Matrix(new_values)
