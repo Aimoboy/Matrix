@@ -1,3 +1,5 @@
+import copy
+
 class Matrix:
 	def __init__(self, values):
 		"""
@@ -73,6 +75,37 @@ class Matrix:
 
 		return output
 
+	def __mul__(self, other):
+		"""
+		Summary:
+		Overload the matrix multiplication.
+
+		Returns:
+		Returns the product of self and other.
+		"""
+
+		if type(other) is Matrix:
+			return self.multiply_matrix_matrix(other)
+		elif type(other) is int:
+			return self.multiply_matrix_scalar(other)
+		else:
+			return NotImplemented()
+
+	def __rmul__(self, other):
+		"""
+		Summary:
+		Overload the matrix multiplication.
+
+		Returns:
+		Returns the product of self and other.
+		"""
+		if type(other) is Matrix:
+			return other.multiply_matrix_matrix(self)
+		elif type(other) is int:
+			return self.multiply_matrix_scalar(other)
+		else:
+			return NotImplemented()
+
 	def check_values(self):
 		"""
 		Summary:
@@ -147,5 +180,18 @@ class Matrix:
 		for x in range(self.rows):
 			for y in range(self.cols):
 				new_values[x][y] = self.values[x][y] * s
+
+		return Matrix(new_values)
+
+	def copy(self):
+		"""
+		Summary:
+		Copy the matrix.
+
+		Returns:
+		A copy of the matrix.
+		"""
+
+		new_values = copy.deepcopy(self.values)
 
 		return Matrix(new_values)
