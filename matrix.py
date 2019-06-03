@@ -195,3 +195,44 @@ class Matrix:
 		new_values = copy.deepcopy(self.values)
 
 		return Matrix(new_values)
+
+	def ero_interchange(self, i, j):
+		"""
+		Summary:
+		Swap the i'th and j'th rows.
+
+		Parameters:
+		i (int): The first row.
+		j (int): The second row.
+		"""
+
+		temp = self.values[i]
+		self.values[i] = self.values[j]
+		self.values[j] = temp
+
+	def ero_scale(self, i, s):
+		"""
+		Summary:
+		Scale each element in the i'th row with s.
+
+		Parameters:
+		i (int): The row.
+		s (unknown): The scalar.
+		"""
+
+		for x in range(self.cols):
+			self.values[i][x] = self.values[i][x] * s
+
+	def ero_replace(self, i, j, s):
+		"""
+		Summary:
+		Add every element in the j'th row scaled by s to the i'th row.
+
+		Parameters:
+		i (int): The row that is being added to.
+		j (int): The row that is added unto the other.
+		s (unknown): The scalar.
+		"""
+
+		for x in range(self.cols):
+			self.values[i][x] = self.values[i][x] + self.values[j][x] * s
