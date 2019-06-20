@@ -167,79 +167,19 @@ class TestMatrix(unittest.TestCase):
 		m2 = Matrix(values)
 		self.assertEqual(3 * m1, m2)
 
-	def test_ero_interchange(self):
+	def test_mul_elements(self):
 		# Test 1
 		values = [
 			[1, 2, 3],
 			[4, 5, 6]]
 		m1 = Matrix(values)
-		m1.ero_interchange(0, 1)
-		values = [
-			[4, 5, 6],
-			[1, 2, 3]]
-		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
-
-		# Test 2
-		values = [
-			[1, 2, 3],
-			[4, 5, 6],
-			[7, 8, 9]]
-		m1 = Matrix(values)
-		m1.ero_interchange(0, 1)
-		values = [
-			[4, 5, 6],
-			[1, 2, 3],
-			[7, 8, 9]]
-		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
-
-	def test_ero_scale(self):
-		# Test 1
-		values = [
-			[1, 2, 3],
-			[4, 5, 6]]
-		m1 = Matrix(values)
-		m1.ero_scale(0, 3)
-		values = [
-			[3, 6, 9],
-			[4, 5, 6]]
-		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
-
-	def test_ero_replace(self):
-		# Test 1
-		values = [
-			[1, 2, 3],
-			[4, 5, 6]]
-		m1 = Matrix(values)
-		m1.ero_replace(0, 1, 1)
-		values = [
-			[5, 7, 9],
-			[4, 5, 6]]
-		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
-
-		# Test 2
-		values = [
-			[1, 2, 3],
-			[4, 5, 6]]
-		m1 = Matrix(values)
-		m1.ero_replace(0, 1, 0)
 		values = [
 			[1, 2, 3],
 			[4, 5, 6]]
 		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
-
-		# Test 3
+		m3 = m1.multiply_elements(m2)
 		values = [
-			[1, 2, 3],
-			[4, 5, 6]]
-		m1 = Matrix(values)
-		m1.ero_replace(0, 1, -1)
-		values = [
-			[-3, -3, -3],
-			[4, 5, 6]]
-		m2 = Matrix(values)
-		self.assertEqual(m1, m2)
+			[1, 4, 9],
+			[16, 25, 36]]
+		m_result = Matrix(values)
+		self.assertEqual(m3, m_result)

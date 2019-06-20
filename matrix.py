@@ -196,43 +196,22 @@ class Matrix:
 
 		return Matrix(new_values)
 
-	def ero_interchange(self, i, j):
+	def multiply_elements(self, other):
 		"""
 		Summary:
-		Swap the i'th and j'th rows.
+		Multiply the elements of two matrices of the same dimension.
 
 		Parameters:
-		i (int): The first row.
-		j (int): The second row.
+		other (Matrix): The other matrix.
 		"""
 
-		temp = self.values[i]
-		self.values[i] = self.values[j]
-		self.values[j] = temp
+		if self.rows != other.rows or self.cols != other.cols:
+			raise ValueError("Matrices are not matching dimensions.")
 
-	def ero_scale(self, i, s):
-		"""
-		Summary:
-		Scale each element in the i'th row with s.
+		new_values = self.generate_empty_values(self.rows, self.cols)
 
-		Parameters:
-		i (int): The row.
-		s (unknown): The scalar.
-		"""
+		for x in range(self.rows):
+			for y in range(self.cols):
+				new_values[x][y] = self.values[x][y] * other.values[x][y]
 
-		for x in range(self.cols):
-			self.values[i][x] = self.values[i][x] * s
-
-	def ero_replace(self, i, j, s):
-		"""
-		Summary:
-		Add every element in the j'th row scaled by s to the i'th row.
-
-		Parameters:
-		i (int): The row that is being added to.
-		j (int): The row that is added unto the other.
-		s (unknown): The scalar.
-		"""
-
-		for x in range(self.cols):
-			self.values[i][x] = self.values[i][x] + self.values[j][x] * s
+		return Matrix(new_values)
